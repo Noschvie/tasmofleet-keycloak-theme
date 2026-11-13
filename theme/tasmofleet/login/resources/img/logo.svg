@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Placeholder logo">
+  <!-- Neutral placeholder, not the TasmoFleet logo (see NOTICE, OQ-02). -->
+  <rect width="48" height="48" rx="10" fill="#444"/>
+  <path d="M12 16h24v4H26v14h-4V20H12z" fill="#fff"/>
+</svg>

@@ -1,0 +1,78 @@
+/* SPDX-License-Identifier: AGPL-3.0-or-later */
+/* Copyright (C) 2026 Noschvie */
+
+/*
+ * TasmoFleet login theme tokens.
+ *
+ * PLACEHOLDER VALUES. Replace with the tokens from the upstream
+ * docs/spec/design-system.md and /styleguide (OQ-02, Phase 0).
+ * Layout values below come from the requirements document and
+ * must be verified against the current upstream specification.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  /* Typography (fonts not yet bundled, fallbacks only) */
+  --tf-font-sans: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --tf-font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* Layout (verify) */
+  --tf-card-max-width: 420px;
+  --tf-card-radius: 12px;
+  --tf-card-padding: 24px;
+  --tf-heading-size: 20px;
+  --tf-heading-weight: 600;
+
+  /* Colours, light (TODO: from design system) */
+  --tf-bg: #ffffff;
+  --tf-surface: #ffffff;
+  --tf-text: #111111;
+  --tf-text-muted: #555555;
+  --tf-border: #dddddd;
+  --tf-accent: #0b5fff;
+  --tf-accent-contrast: #ffffff;
+  --tf-danger: #b00020;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Colours, dark (TODO: from design system) */
+    --tf-bg: #0b0b0c;
+    --tf-surface: #151517;
+    --tf-text: #f2f2f3;
+    --tf-text-muted: #a1a1a6;
+    --tf-border: #2a2a2e;
+    --tf-accent: #5b8cff;
+    --tf-accent-contrast: #0b0b0c;
+    --tf-danger: #ff6b81;
+  }
+}
+
+/*
+ * Fonts: enable once the files and OFL notice are in ../fonts/.
+ *
+ * @font-face {
+ *   font-family: "Geist";
+ *   src: url("../fonts/Geist-Variable.woff2") format("woff2");
+ *   font-weight: 100 900;
+ *   font-display: swap;
+ * }
+ */
+
+body {
+  font-family: var(--tf-font-sans);
+}
+
+/*
+ * Next step (Phase 2): map the --tf-* tokens onto the parent theme's
+ * variables and selectors after inspecting the rendered login page.
+ * Do not guess selectors here.
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

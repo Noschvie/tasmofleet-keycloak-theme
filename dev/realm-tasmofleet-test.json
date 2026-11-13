@@ -1,0 +1,57 @@
+{
+  "realm": "tasmofleet",
+  "enabled": true,
+  "loginTheme": "tasmofleet",
+  "registrationAllowed": false,
+  "resetPasswordAllowed": true,
+  "rememberMe": true,
+  "verifyEmail": false,
+  "internationalizationEnabled": true,
+  "supportedLocales": ["en", "de"],
+  "defaultLocale": "en",
+  "clients": [
+    {
+      "clientId": "tasmofleet",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "secret": "dev-only-secret",
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": ["http://localhost:8081/*"],
+      "webOrigins": ["http://localhost:8081"]
+    }
+  ],
+  "users": [
+    {
+      "username": "alice",
+      "enabled": true,
+      "email": "alice@example.test",
+      "emailVerified": true,
+      "firstName": "Alice",
+      "lastName": "Normal",
+      "credentials": [{"type": "password", "value": "alice", "temporary": false}]
+    },
+    {
+      "username": "bob",
+      "enabled": true,
+      "email": "bob@example.test",
+      "emailVerified": true,
+      "firstName": "Bob",
+      "lastName": "UpdatePassword",
+      "requiredActions": ["UPDATE_PASSWORD"],
+      "credentials": [{"type": "password", "value": "bob", "temporary": false}]
+    },
+    {
+      "username": "carol",
+      "enabled": true,
+      "email": "carol@example.test",
+      "emailVerified": true,
+      "firstName": "Carol",
+      "lastName": "ConfigureOtp",
+      "requiredActions": ["CONFIGURE_TOTP"],
+      "credentials": [{"type": "password", "value": "carol", "temporary": false}]
+    }
+  ]
+}

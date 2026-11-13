@@ -1,0 +1,21 @@
+tasmofleet-keycloak-theme
+Copyright (C) 2026 Noschvie
+Licensed under AGPL-3.0-or-later (see LICENSE).
+
+Third-party components
+----------------------
+
+Keycloak (base themes)
+  Apache License 2.0, https://github.com/keycloak/keycloak
+  Applies only to files copied or derived from Keycloak themes.
+  Keep the original notices in such files.
+
+Geist / Geist Mono
+  SIL Open Font License 1.1 (Vercel). Not yet included.
+  Add the font files, OFL.txt and the copyright notice to
+  theme/tasmofleet/login/resources/fonts/ before use.
+
+TasmoFleet logo and brand assets
+  Not covered by the AGPL. Redistribution terms are to be confirmed with
+  the TasmoFleet maintainer (OQ-02). The current logo.svg is a neutral
+  placeholder created for this project.
