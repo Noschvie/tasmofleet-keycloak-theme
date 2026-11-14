@@ -81,8 +81,19 @@ Nothing else changes: no ports, no proxy settings, no environment variables.
 2. Verify availability: Admin Console, realm `tasmofleet` (or any test realm),
    Realm settings, Themes: `tasmofleet` is listed under Login theme.
 3. Provision or update the realm in the Keycloak configuration project. It must set
-   - `loginTheme: "tasmofleet"`
-   - `displayName: "TasmoFleet"` (the brand above the card is the realm's display name; without it the lower-case realm name is shown)
+   the following realm attributes:
+
+   | Realm attribute | Value | Admin Console (Realm settings) | Used for |
+   |---|---|---|---|
+   | `loginTheme` | `tasmofleet` | Themes → Login theme | Activates the theme |
+   | `displayName` | `TasmoFleet` | General → Display name | Browser tab title, e-mails |
+   | `displayNameHtml` | `TasmoFleet` | General → HTML Display name | Brand above the login card |
+
+   The brand name is **not** part of the theme. Keycloak takes it from the realm and
+   falls back to the technical realm name (`tasmofleet`, lower case) when the display
+   names are empty. Changes take effect immediately, without a recreate.
+   If you set the values by hand in the Admin Console, also add them to the realm
+   provisioning, otherwise the next import overwrites them.
 4. Open the login page and compare it with the screenshots in `README.md`.
 5. Test the OIDC login from TasmoFleet end to end (login, redirect, logout).
 
@@ -122,5 +133,5 @@ is not affected by this theme.
 | Theme is not in the list | Mount path, `docker exec keycloak ls /opt/keycloak/themes/tasmofleet/login`, file permissions |
 | Login page looks like the default | Realm setting `loginTheme`; in the page source, resource paths must contain `/login/tasmofleet/` |
 | Old CSS after an update | Container was restarted, not recreated (symlink); recreate it |
-| Brand shows `tasmofleet` in lower case | Realm `displayName` is not set |
+| Brand shows `tasmofleet` in lower case | Realm settings → General: `Display name` / `HTML Display name` are empty (see step 5.3); no theme change or recreate needed |
 | Fonts missing | Network tab: `geist-latin.woff2` must load from the same origin |
