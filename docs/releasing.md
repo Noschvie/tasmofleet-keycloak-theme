@@ -37,9 +37,9 @@ git merge --no-ff development
 git tag -a vx.y.z -m "Release x.y.z"
 git push origin main vx.y.z
 
-scripts/package.sh x.y.z          # builds dist/ archive and checksum
-# 3. GitHub: create the release from the tag, attach the .tar.gz and the .sha256
-# 4. deploy as described in deployment.md
+# 3. GitHub: create the release from the tag. GitHub adds the source archives
+#    (zip, tar.gz) itself; nothing is attached by hand.
+# 4. deploy as described in deployment.md (source archive, folder theme/tasmofleet)
 git switch development && git merge main
 ```
 

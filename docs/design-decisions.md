@@ -10,7 +10,7 @@
 | OQ-04 | Dark mode switch | Decided (initial) | System preference only |
 | OQ-05 | Footer | **Decided 2026-11-14** | None. The upstream sign-in footer shows the application version and host, which Keycloak does not know |
 | OQ-06 | Repository licence | **Decided 2026-11-13** | AGPL-3.0-or-later |
-| OQ-07 | Theme packaging | **Decided 2026-11-14** | Release archive (`scripts/package.sh`) unpacked on the host, read-only Docker volume, see `deployment.md` |
+| OQ-07 | Theme packaging | **Decided 2026-11-14** | GitHub source archive of the tag, unpacked on the host (`theme/tasmofleet` is the theme), read-only Docker volume, see `deployment.md`. `scripts/package.sh` stays as an optional tool |
 | OQ-08 | Upstream contribution | Open, agreed in principle | Maintainer is fine with a short PR ("Community projects" in the README) after the first release, see https://github.com/hellwand/tasmofleet/issues/830 |
 
 ## Decision log

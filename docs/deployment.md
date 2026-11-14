@@ -7,33 +7,41 @@ No custom Keycloak image is needed (requirements, section 13).
 > The paths below are assumptions, because the production compose file is not part of
 > this repository. Adjust them to your setup; the order of the steps stays the same.
 
-## 1. Release archive
+## 1. Get the release
 
-```bash
-scripts/package.sh 0.1.0
-# dist/tasmofleet-keycloak-theme-0.1.0.tar.gz and .sha256
-```
+Every release is a tag on `main` (see `releasing.md`). Download the source archive that
+GitHub attaches to the tag ("Source code (tar.gz)") and unpack it; the theme is the folder
+`theme/tasmofleet`. `LICENSE` and `NOTICE` stay next to it.
 
-The archive holds one folder `tasmofleet/` with `login/`, `LICENSE`, `NOTICE`, `VERSION`.
-Deploy only archives built from a tag on `main` (see `releasing.md`).
+GitHub does not guarantee stable checksums for these generated archives, so none is
+published. If you want to verify the content, compare it with the tag in a clone
+(`git clone --branch v0.1.1 <repository>`).
+
+Deploy only tags on `main`. `scripts/package.sh` is optional (an archive with the theme alone).
 
 ## 2. Directory layout on the host
 
-Every release lives in its own folder, a symlink points to the active one:
+Every release lives in its own folder, a symlink points to the theme inside the active one:
 
 ```text
 /srv/keycloak/themes/
   releases/
-    0.1.0/tasmofleet/     <- unpacked archive
-    0.1.1/tasmofleet/
-  tasmofleet -> releases/0.1.0/tasmofleet
+    0.1.1/                <- unpacked source archive
+      theme/tasmofleet/   <- the Keycloak theme
+      LICENSE  NOTICE  docs/ ...
+    0.1.2/
+  tasmofleet -> releases/0.1.1/theme/tasmofleet
 ```
 
 ```bash
-sudo mkdir -p /srv/keycloak/themes/releases/0.1.0
-sudo tar -xzf tasmofleet-keycloak-theme-0.1.0.tar.gz -C /srv/keycloak/themes/releases/0.1.0
-sudo ln -sfn releases/0.1.0/tasmofleet /srv/keycloak/themes/tasmofleet
+sudo mkdir -p /srv/keycloak/themes/releases/0.1.1
+sudo tar -xzf tasmofleet-keycloak-theme-0.1.1.tar.gz --strip-components=1 \
+  -C /srv/keycloak/themes/releases/0.1.1
+sudo ln -sfn releases/0.1.1/theme/tasmofleet /srv/keycloak/themes/tasmofleet
 ```
+
+(The file name of the download is `tasmofleet-keycloak-theme-<version>.tar.gz` for a tag `v<version>`;
+`--strip-components=1` removes the top folder whatever its name is.)
 
 Ownership and permissions: owner `root`, directories `755`, files `644`. The Keycloak
 container runs as an unprivileged user and only needs read access. Nobody except
@@ -84,9 +92,10 @@ not contain theme files (requirements, section 6.2).
 ## 6. Update
 
 ```bash
-sudo mkdir -p /srv/keycloak/themes/releases/0.1.1
-sudo tar -xzf tasmofleet-keycloak-theme-0.1.1.tar.gz -C /srv/keycloak/themes/releases/0.1.1
-sudo ln -sfn releases/0.1.1/tasmofleet /srv/keycloak/themes/tasmofleet
+sudo mkdir -p /srv/keycloak/themes/releases/0.1.2
+sudo tar -xzf tasmofleet-keycloak-theme-0.1.2.tar.gz --strip-components=1 \
+  -C /srv/keycloak/themes/releases/0.1.2
+sudo ln -sfn releases/0.1.2/theme/tasmofleet /srv/keycloak/themes/tasmofleet
 docker compose up -d --force-recreate keycloak
 ```
 
@@ -95,11 +104,11 @@ Then run the checklist in `testing.md` for the changed pages.
 ## 7. Rollback
 
 ```bash
-sudo ln -sfn releases/0.1.0/tasmofleet /srv/keycloak/themes/tasmofleet
+sudo ln -sfn releases/0.1.1/theme/tasmofleet /srv/keycloak/themes/tasmofleet
 docker compose up -d --force-recreate keycloak
 ```
 
-The previous release folder stays on disk, so a rollback takes one symlink and one recreate.
+(Use the folder of the release you want back.) The previous release folder stays on disk, so a rollback takes one symlink and one recreate.
 Keep at least the last two releases and delete older ones by hand.
 
 If the theme itself is broken and the login page cannot be used, select another login theme

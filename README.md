@@ -48,7 +48,7 @@ The dev realm has the users `alice`, `bob` (must update password) and `carol`
 | `dev/smoke-test.sh` | Automatic checks against the dev realm: theme active, assets, no external requests, security headers, invalid and successful sign-in with redirect, logout page |
 | `dev/capture-pages.sh` | Saves the HTML of the login, error, logout, required-action and reset pages to `dev/snapshots/` (git-ignored) |
 | `scripts/check-pf-vars.py` | Checks that every PatternFly variable the theme sets exists in a PatternFly release |
-| `scripts/package.sh <version>` | Builds the release archive in `dist/` |
+| `scripts/package.sh <version>` | Optional: builds an archive that contains the theme alone (`dist/`); releases use the GitHub source archive |
 
 ## Documentation
 

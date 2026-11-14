@@ -5,6 +5,14 @@ Format based on Keep a Changelog, versioning follows SemVer.
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-11-14
+
+### Fixed
+- `.gitignore` excluded every `screenshots/` folder, now only the one in the repository root (`/screenshots/`).
+
+### Changed
+- Releases use the source archive that GitHub creates for the tag; `deployment.md` and `releasing.md` describe unpacking it (theme folder `theme/tasmofleet`). `scripts/package.sh` is optional.
+
 ## [0.1.1] - 2026-11-14
 
 ### Fixed

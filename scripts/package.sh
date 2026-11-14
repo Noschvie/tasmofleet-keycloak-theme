@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Copyright (C) 2026 Noschvie
 #
-# Builds the release archive: dist/tasmofleet-keycloak-theme-<version>.tar.gz (+ .sha256).
+# Optional: builds an archive with the theme alone (releases use the GitHub source archive): dist/tasmofleet-keycloak-theme-<version>.tar.gz (+ .sha256).
 # The archive contains one directory `tasmofleet/` (the Keycloak theme) with LICENSE,
 # NOTICE and VERSION next to the `login/` folder. Unpack it into the themes directory.
 #
