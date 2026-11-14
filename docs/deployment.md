@@ -4,8 +4,10 @@ Target: Keycloak 26.8.2 in Docker on Eibesthal, behind Nginx Proxy Manager, LAN 
 The theme is a directory that Keycloak reads from `/opt/keycloak/themes/tasmofleet`.
 No custom Keycloak image is needed (requirements, section 13).
 
-> The paths below are assumptions, because the production compose file is not part of
-> this repository. Adjust them to your setup; the order of the steps stays the same.
+> The paths in sections 1 to 7 are assumptions, because the production compose file is not
+> part of this repository. Adjust them to your setup; the order of the steps stays the same.
+> The simple variant without versioned folders, as used on Eibesthal, is described in
+> "Simple variant" below.
 
 ## 1. Get the release
 
@@ -125,6 +127,36 @@ Keep at least the last two releases and delete older ones by hand.
 If the theme itself is broken and the login page cannot be used, select another login theme
 (`keycloak.v2`) for the realm in the Admin Console. The Admin Console of the `master` realm
 is not affected by this theme.
+
+## Simple variant (no versioned folders, used on Eibesthal)
+
+If you do not need several releases side by side, put the theme folder next to the compose
+file and mount it directly, without a symlink:
+
+```text
+./volumes/theme/tasmofleet/      <- content of theme/tasmofleet from the release
+```
+
+```yaml
+services:
+  keycloak:
+    volumes:
+      - ./volumes/keycloak-data:/opt/keycloak/data
+      - ./volumes/theme/tasmofleet:/opt/keycloak/themes/tasmofleet:ro
+```
+
+Update: replace the files **in place**, then restart. Keep the folder itself (do not delete
+and recreate it), otherwise the container keeps the old directory mounted:
+
+```bash
+rsync -a --delete <unpacked release>/theme/tasmofleet/ ./volumes/theme/tasmofleet/
+docker compose restart keycloak
+```
+
+Keycloak caches themes in production, so the restart is needed. Without a symlink a plain
+`restart` is enough; `up -d --force-recreate` also works (it was used on Eibesthal). Rollback:
+put the previous release into the folder the same way, so keep a copy of the last release (for
+example the downloaded archive) outside the folder.
 
 ## 8. Troubleshooting
 

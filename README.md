@@ -26,8 +26,7 @@ Custom Keycloak **login theme** in the visual identity of
 
 1. Put the theme directory `tasmofleet` into `/opt/keycloak/themes/` (read-only volume), see
    [docs/deployment.md](docs/deployment.md).
-2. Set in the realm: `loginTheme` = `tasmofleet` and `displayName` = `TasmoFleet`.
-   The brand above the card is the realm's display name.
+2. Set in the realm: `loginTheme` = `tasmofleet`, `displayName` = `TasmoFleet` and `displayNameHtml` = `TasmoFleet` (the brand above the card comes from the realm, see `docs/deployment.md`).
 
 ## Development
 

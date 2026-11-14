@@ -1,6 +1,7 @@
 {
   "realm": "tasmofleet",
   "displayName": "TasmoFleet",
+  "displayNameHtml": "TasmoFleet",
   "enabled": true,
   "loginTheme": "tasmofleet",
   "registrationAllowed": false,

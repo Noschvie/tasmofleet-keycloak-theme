@@ -74,13 +74,13 @@ Note: the Keycloak account console (`/realms/<realm>/account`) is a JavaScript a
 |---|---|
 | Dedicated `tasmofleet` realm | Dev realm exists; production realm belongs to the configuration project |
 | Existing `knx` realm unaffected | Not touched by the theme; verify after deployment |
-| Realm provisioning selects the theme | Open: `loginTheme` and `displayName` in the configuration project |
+| Realm provisioning selects the theme | Theme works in the production realm (2026-11-14). The brand name is a realm setting (`displayName`, `displayNameHtml`) and had to be corrected by hand; both must be set in the configuration project together with `loginTheme: "tasmofleet"` |
 | TasmoFleet design specification followed | Done (tokens, card, controls, banners); one open point: control border contrast, issue hellwand/tasmofleet#829 |
 | Logo and font licensing clarified | Done: answered in hellwand/tasmofleet#830; logo, favicon, fonts and tokens come from tag v0.36.1 (AGPL repository, OFL fonts) |
 | Light and dark appearance | Done, checked on the captured pages |
 | Responsive layout | Done for 375 px (sign-in, banner, OTP); tablet widths not checked separately |
 | Keycloak authentication fully functional | Sign-in, error, forgot password, update password, OTP setup, error page and logout seen; the redirect to the application is checked after deployment |
-| Existing OIDC integration works | Open: check after deployment |
+| Existing OIDC integration works | Done: complete OIDC login from TasmoFleet on Eibesthal, 2026-11-14 |
 | Logout and redirects work | Logout confirmation seen; redirects are checked after deployment |
 | Accessibility requirements fulfilled | Contrast audited (one open point, see above); keyboard navigation and screen reader not yet tested |
 | Docker deployment documented | Done, `deployment.md` (paths are assumptions) |
