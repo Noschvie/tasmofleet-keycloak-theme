@@ -5,31 +5,43 @@ Test realm: `dev/realm-tasmofleet-test.json`
 
 ## Functional
 
-- [ ] Successful login (alice)
-- [ ] Invalid credentials
-- [ ] Forgot password page
-- [ ] Update password required action (bob)
-- [ ] Configure OTP required action (carol)
-- [ ] Logout and redirect
-- [ ] Error page
+- [x] Successful login (alice), 2026-11-14 (the account console needs HTTPS or localhost, see below)
+- [x] Invalid credentials
+- [x] Forgot password page
+- [x] Update password required action (bob)
+- [x] Configure OTP required action (carol)
+- [x] Logout confirmation page (button and back link)
+- [x] Error page (invalid redirect URI)
+- [ ] Logout redirect to the application and OTP login with an existing device: check after deployment
+
+## Automatic: `dev/smoke-test.sh`
+
+Run it after every change and before every release. It covers part of the functional and
+integration tests below for the dev realm: theme active, stylesheet, font and favicon served,
+no external requests, Keycloak security headers, invalid credentials, successful sign-in with
+redirect to the application, logout page. Keyboard navigation, screen readers and the
+visual checks stay manual.
 
 ## Pages captured by `dev/capture-pages.sh`
 
-- [ ] Login with wrong password: red field border, status icon, error text under the field
-- [ ] Update password (`bob`): warning banner with dot, two password fields, checkbox
-- [ ] Configure OTP (`carol`): list, QR code (white ground in dark mode), fields
-- [ ] Forgot password: secondary button "Back to Login", info band
+- [x] Login with wrong password: red field border, status icon, error text under the field
+- [x] Update password (`bob`): warning banner with dot, two password fields, checkbox
+- [x] Configure OTP (`carol`): list, QR code (white ground in dark mode), fields
+- [x] Forgot password: secondary button "Back to Login", info band
 - [x] Danger banner "account disabled" (captured with disabled users, light mode, 375 px)
 - [x] Timeout banner "login attempt timed out" (light and dark, 375 px)
-- [ ] Favicon in the browser tab is the TasmoFleet one (depends on OQ-02, currently Keycloak's)
-- [ ] Not yet seen: OTP login (user with OTP), error page ("We are sorry", invalid redirect URI), logout confirmation, success banner, password policy errors, verify e-mail (needs SMTP)
-- [ ] 375 px: OTP heading without a broken word (after the narrow-screen change)
+- [x] Favicon in the browser tab is the TasmoFleet one (blue tile, white ring)
+- [ ] Not seen: OTP login (user with OTP), success banner, password policy errors, verify e-mail (needs SMTP)
+- [x] Error page and logout confirmation (light and dark)
+- [x] 375 px: OTP heading without a broken word (after the narrow-screen change)
+
+Note: the Keycloak account console (`/realms/<realm>/account`) is a JavaScript app that needs a secure context (HTTPS or `localhost`). Over plain HTTP from another host it shows "An error occurred". That is not a theme problem and not part of this theme.
 
 ## Visual (light / dark x desktop / tablet / mobile)
 
-- [ ] Login
-- [ ] Validation and error states
-- [ ] Required action pages
+- [x] Login
+- [x] Validation and error states
+- [x] Required action pages
 - [ ] Language switch (en, de)
 - [ ] Card width 420 px, radius 12, padding 24 (DevTools)
 - [ ] Geist loads (Network tab, no external requests)
@@ -64,12 +76,12 @@ Test realm: `dev/realm-tasmofleet-test.json`
 | Existing `knx` realm unaffected | Not touched by the theme; verify after deployment |
 | Realm provisioning selects the theme | Open: `loginTheme` and `displayName` in the configuration project |
 | TasmoFleet design specification followed | Done (tokens, card, controls, banners); one open point: control border contrast, issue hellwand/tasmofleet#829 |
-| Logo and font licensing clarified | Open: asked in hellwand/tasmofleet#830; fonts and tokens come from the AGPL repository, the logo is a placeholder |
+| Logo and font licensing clarified | Done: answered in hellwand/tasmofleet#830; logo, favicon, fonts and tokens come from tag v0.36.1 (AGPL repository, OFL fonts) |
 | Light and dark appearance | Done, checked on the captured pages |
 | Responsive layout | Done for 375 px (sign-in, banner, OTP); tablet widths not checked separately |
-| Keycloak authentication fully functional | Sign-in, error, forgot password, update password and OTP setup seen; successful login with redirect still to be checked |
+| Keycloak authentication fully functional | Sign-in, error, forgot password, update password, OTP setup, error page and logout seen; the redirect to the application is checked after deployment |
 | Existing OIDC integration works | Open: check after deployment |
-| Logout and redirects work | Open: check after deployment, logout page not yet seen |
+| Logout and redirects work | Logout confirmation seen; redirects are checked after deployment |
 | Accessibility requirements fulfilled | Contrast audited (one open point, see above); keyboard navigation and screen reader not yet tested |
 | Docker deployment documented | Done, `deployment.md` (paths are assumptions) |
 | Rollback documented | Done, `deployment.md` |

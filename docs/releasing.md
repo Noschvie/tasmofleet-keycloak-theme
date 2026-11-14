@@ -19,12 +19,10 @@ Semantic Versioning, tags `vMAJOR.MINOR.PATCH`.
 - Minor: new pages or components, design changes following upstream.
 - Major: a change that needs action in the realm configuration or a new Keycloak major version.
 
-## Pre-release until the branding is clear
+## Pre-release
 
-Until the maintainer has answered the questions about logo and fonts (OQ-02, OQ-03) the
-theme ships with a placeholder logo and favicon. Tags up to that point are marked as
-**pre-release** on GitHub. The first release without that mark is the one with the
-confirmed logo and favicon.
+The earlier condition (confirmed logo and fonts, OQ-02/OQ-03) is met since 2026-11-14, so
+0.1.0 can be a normal release. Mark a tag as pre-release only when something is unfinished.
 
 ## Steps
 

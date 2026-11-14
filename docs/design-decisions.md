@@ -5,13 +5,13 @@
 | ID | Question | Status | Notes |
 |---|---|---|---|
 | OQ-01 | Parent theme | **Decided 2026-11-13** | `keycloak.v2`; `styles=css/styles.css css/tasmofleet-login.css` verified on 26.8.2 (both stylesheets are loaded) |
-| OQ-02 | Logo and favicon | Open | Asked in https://github.com/hellwand/tasmofleet/issues/830; neutral placeholder logo and a generated placeholder favicon are in use. Replace `logo.svg` and `favicon.ico` after the answer |
-| OQ-03 | Font assets | Decided (initial) | Geist latin and latin-ext woff2 bundled with OFL.txt; copied from the TasmoFleet repo, confirmation asked in https://github.com/hellwand/tasmofleet/issues/830 |
+| OQ-02 | Logo and favicon | **Decided 2026-11-14** | Maintainer answered in https://github.com/hellwand/tasmofleet/issues/830: `assets/branding/logo.svg` and `favicon.ico` may be used (AGPL-3.0-or-later, name source/path/tag in NOTICE, no official-looking presentation). Copied from tag v0.36.1. `favicon.svg` not bundled (the Keycloak template links only `favicon.ico`; a template override is not worth it) |
+| OQ-03 | Font assets | **Decided 2026-11-14** | Geist latin and latin-ext woff2 bundled with OFL.txt, confirmed by the maintainer; byte-identical to tag v0.36.1 |
 | OQ-04 | Dark mode switch | Decided (initial) | System preference only |
 | OQ-05 | Footer | **Decided 2026-11-14** | None. The upstream sign-in footer shows the application version and host, which Keycloak does not know |
 | OQ-06 | Repository licence | **Decided 2026-11-13** | AGPL-3.0-or-later |
 | OQ-07 | Theme packaging | **Decided 2026-11-14** | Release archive (`scripts/package.sh`) unpacked on the host, read-only Docker volume, see `deployment.md` |
-| OQ-08 | Upstream contribution | Open | Link from the Keycloak documentation asked in https://github.com/hellwand/tasmofleet/issues/830, page or PR after the first release |
+| OQ-08 | Upstream contribution | Open, agreed in principle | Maintainer is fine with a short PR ("Community projects" in the README) after the first release, see https://github.com/hellwand/tasmofleet/issues/830 |
 
 ## Decision log
 

@@ -25,7 +25,7 @@ link_to()     { grep -o "href=\"[^\"]*$2[^\"]*\"" "$1" | head -1 | sed 's/^href=
 
 fresh() {  # fresh session, saves the login page to $1
   : > "$JAR"
-  curl -s -c "$JAR" -b "$JAR" "$AUTH" -o "$1"
+  curl -s --max-time 15 -c "$JAR" -b "$JAR" "$AUTH" -o "$1"
 }
 
 login_as() {  # $1 user, $2 password, $3 output file
@@ -33,7 +33,7 @@ login_as() {  # $1 user, $2 password, $3 output file
   fresh "$page"
   action="$(form_action "$page")"
   # the last redirect may point to the (not running) test application: ignore that failure
-  curl -s -L --max-redirs 5 -c "$JAR" -b "$JAR" \
+  curl -s --max-time 15 -L --max-redirs 5 -c "$JAR" -b "$JAR" \
     --data-urlencode "username=$1" --data-urlencode "password=$2" --data-urlencode "credentialId=" \
     "$action" -o "$3" || true
 }
@@ -45,10 +45,16 @@ login_as alice wrong-password "$OUT/login-error.html";     echo "login-error.htm
 login_as bob bob "$OUT/required-update-password.html";     echo "required-update-password.html"
 login_as carol carol "$OUT/required-configure-totp.html";  echo "required-configure-totp.html"
 
+curl -s --max-time 15 "$BASE/realms/$REALM/protocol/openid-connect/auth?client_id=tasmofleet&redirect_uri=http://invalid.example/&response_type=code&scope=openid" \
+  -o "$OUT/error-page.html";                                echo "error-page.html (invalid redirect URI)"
+login_as alice alice "$OUT/.login-tmp.html"
+curl -s --max-time 15 -b "$JAR" -c "$JAR" "$BASE/realms/$REALM/protocol/openid-connect/logout" \
+  -o "$OUT/logout-confirm.html";                            echo "logout-confirm.html"
+
 fresh "$OUT/.login-tmp.html"
 href="$(link_to "$OUT/.login-tmp.html" reset-credentials)"
 if [ -n "$href" ]; then
-  curl -s -c "$JAR" -b "$JAR" "$BASE$href" -o "$OUT/reset-credentials.html"; echo "reset-credentials.html"
+  curl -s --max-time 15 -c "$JAR" -b "$JAR" "$BASE$href" -o "$OUT/reset-credentials.html"; echo "reset-credentials.html"
 else
   echo "reset-credentials: no link found (Forgot password disabled?)"
 fi

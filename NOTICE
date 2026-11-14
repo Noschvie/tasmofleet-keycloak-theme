@@ -10,12 +10,24 @@ Keycloak (base themes)
   Applies only to files copied or derived from Keycloak themes.
   Keep the original notices in such files.
 
-Geist / Geist Mono
-  SIL Open Font License 1.1 (Vercel). Not yet included.
-  Add the font files, OFL.txt and the copyright notice to
-  theme/tasmofleet/login/resources/fonts/ before use.
+Geist
+  Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font)
+  SIL Open Font License 1.1, text in
+  theme/tasmofleet/login/resources/fonts/OFL.txt.
+  geist-latin.woff2 and geist-latin-ext.woff2 are copied unmodified from the
+  TasmoFleet repository (hellwand/tasmofleet, internal/web/static/, tag v0.36.1). The fonts stay under the OFL
+  and are not covered by the AGPL.
 
-TasmoFleet logo and brand assets
-  Not covered by the AGPL. Redistribution terms are to be confirmed with
-  the TasmoFleet maintainer (OQ-02). The current logo.svg is a neutral
-  placeholder created for this project.
+TasmoFleet design tokens
+  Colour, radius and spacing values in tasmofleet-login.css are copied from
+  docs/spec/design-system.md of hellwand/tasmofleet, release tag v0.36.1
+  (AGPL-3.0-or-later, see its NOTICE).
+
+TasmoFleet logo and favicon
+  logo.svg: assets/branding/logo.svg, favicon.ico: internal/web/static/favicon.ico,
+  both from hellwand/tasmofleet, release tag v0.36.1, copied unmodified into
+  theme/tasmofleet/login/resources/img/. AGPL-3.0-or-later like the upstream
+  repository (https://github.com/hellwand/tasmofleet/issues/830).
+  This theme is an unofficial community project and not affiliated with
+  TasmoFleet; the logo is used only to identify the application the login
+  belongs to.
