@@ -5,6 +5,11 @@ Format based on Keep a Changelog, versioning follows SemVer.
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-14
+
+### Fixed
+- README screenshots were missing from the 0.1.0 tag (documentation only, the theme is unchanged).
+
 ## [0.1.0] - 2026-11-14
 
 First release.
