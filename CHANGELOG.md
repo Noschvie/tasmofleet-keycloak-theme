@@ -5,19 +5,26 @@ Format based on Keep a Changelog, versioning follows SemVer.
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-11-15
+
 ### Changed
 - Text inputs, the password field and secondary buttons use the new TasmoFleet token `--color-control-border` (`#808a94` light, `#68737f` dark): 3.5:1 / 3.7:1 against the card instead of 1.67:1 / 1.75:1, which meets WCAG 1.4.11 (hellwand/tasmofleet#829, released in TasmoFleet v0.38.0). `--color-border-strong` stays for dividers and card edges.
 - Tokens, logo, favicon and fonts now refer to TasmoFleet release v0.38.0; the logo, favicon and fonts are byte-identical to v0.36.1, the token table differs only by the new token.
 - Brand name: `deployment.md`, README and the dev realm now name both realm fields, `displayName` and `displayNameHtml` (the brand above the card comes from the realm).
 - `deployment.md`: added the simple variant without versioned folders (direct bind mount `./volumes/theme/tasmofleet`), as used on Eibesthal.
 
-## [0.1.1] - 2026-11-14
+## [0.1.2] - 2026-11-14
 
 ### Fixed
-- README screenshots were missing from 0.1.0: `.gitignore` excluded every `screenshots/` folder, now only the one in the repository root (`/screenshots/`).
+- `.gitignore` excluded every `screenshots/` folder, now only the one in the repository root (`/screenshots/`).
 
 ### Changed
 - Releases use the source archive that GitHub creates for the tag; `deployment.md` and `releasing.md` describe unpacking it (theme folder `theme/tasmofleet`). `scripts/package.sh` is optional.
+
+## [0.1.1] - 2026-11-14
+
+### Fixed
+- README screenshots were missing from the 0.1.0 tag (documentation only, the theme is unchanged).
 
 ## [0.1.0] - 2026-11-14
 
