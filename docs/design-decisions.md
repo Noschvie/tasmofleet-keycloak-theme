@@ -12,6 +12,7 @@
 | OQ-06 | Repository licence | **Decided 2026-11-13** | AGPL-3.0-or-later |
 | OQ-07 | Theme packaging | **Decided 2026-11-14** | GitHub source archive of the tag, unpacked on the host (`theme/tasmofleet` is the theme), read-only Docker volume, see `deployment.md`. `scripts/package.sh` stays as an optional tool |
 | OQ-08 | Upstream contribution | Open, agreed in principle | Maintainer is fine with a short PR ("Community projects" in the README) after the first release, see https://github.com/hellwand/tasmofleet/issues/830 |
+| OQ-09 | Control border contrast | **Decided 2026-11-15** | Upstream issue hellwand/tasmofleet#829, option A: dedicated token `--color-control-border` for inputs, selects and default buttons (WCAG 1.4.11). Released in TasmoFleet v0.38.0; the theme uses it for `.pf-v5-c-form-control`, `.pf-v5-c-input-group` and the secondary button. The PatternFly border variables keep `--color-border-strong` |
 
 ## Decision log
 

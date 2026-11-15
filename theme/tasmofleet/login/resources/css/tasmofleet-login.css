@@ -6,8 +6,8 @@
  *
  * Parent: keycloak.v2 (PatternFly 5.4.2 in Keycloak 26.8.2).
  *
- * Tokens from docs/spec/design-system.md @ v0.36.1
- * (https://github.com/hellwand/tasmofleet/tree/v0.36.1).
+ * Tokens from docs/spec/design-system.md @ v0.38.0
+ * (https://github.com/hellwand/tasmofleet/tree/v0.38.0).
  * Token names and values are copied verbatim, so a diff against upstream
  * stays possible. On a tag update read the TasmoFleet changelog, then
  * re-check the values. All colours and spacings live in the token blocks
@@ -50,6 +50,7 @@
   --color-surface-3: #e5e8ec;
   --color-border: #dfe3e7;
   --color-border-strong: #c2c9d0;
+  --color-control-border: #808a94;
   --color-text: #13171c;
   --color-text-2: #48535e;
   --color-text-3: #5c6772;
@@ -101,6 +102,7 @@
   --color-surface-3: #242a31;
   --color-border: #262c33;
   --color-border-strong: #3a424b;
+  --color-control-border: #68737f;
   --color-text: #e4e7ea;
   --color-text-2: #a9b2bb;
   --color-text-3: #939da7;
@@ -255,7 +257,7 @@ h1#kc-page-title {
   box-sizing: border-box;
   height: var(--ctl);
   background: var(--color-surface);
-  border: var(--hair-w) solid var(--color-border-strong);
+  border: var(--hair-w) solid var(--color-control-border);
   border-radius: var(--r-control);
 }
 .pf-v5-c-form-control::before,
@@ -292,7 +294,7 @@ h1#kc-page-title {
   box-sizing: border-box;
   height: var(--ctl);
   background: var(--color-surface);
-  border: var(--hair-w) solid var(--color-border-strong);
+  border: var(--hair-w) solid var(--color-control-border);
   border-radius: var(--r-control);
   overflow: hidden;
 }
@@ -485,7 +487,7 @@ ul.pf-v5-c-helper-text__item-text.pf-m-error {
 }
 .pf-v5-c-button.pf-m-secondary::after {
   border-width: var(--hair-w);
-  border-color: var(--color-border-strong);
+  border-color: var(--color-control-border);
   border-radius: var(--r-control);
 }
 .pf-v5-c-button.pf-m-secondary:hover,
@@ -496,7 +498,7 @@ ul.pf-v5-c-helper-text__item-text.pf-m-error {
 .pf-v5-c-button.pf-m-secondary:hover::after,
 .pf-v5-c-button.pf-m-secondary:focus::after {
   border-width: var(--hair-w);
-  border-color: var(--color-border-strong);
+  border-color: var(--color-control-border);
 }
 
 /* several buttons in one row of actions */

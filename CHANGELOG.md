@@ -6,6 +6,8 @@ Format based on Keep a Changelog, versioning follows SemVer.
 ## [Unreleased]
 
 ### Changed
+- Text inputs, the password field and secondary buttons use the new TasmoFleet token `--color-control-border` (`#808a94` light, `#68737f` dark): 3.5:1 / 3.7:1 against the card instead of 1.67:1 / 1.75:1, which meets WCAG 1.4.11 (hellwand/tasmofleet#829, released in TasmoFleet v0.38.0). `--color-border-strong` stays for dividers and card edges.
+- Tokens, logo, favicon and fonts now refer to TasmoFleet release v0.38.0; the logo, favicon and fonts are byte-identical to v0.36.1, the token table differs only by the new token.
 - Brand name: `deployment.md`, README and the dev realm now name both realm fields, `displayName` and `displayNameHtml` (the brand above the card comes from the realm).
 - `deployment.md`: added the simple variant without versioned folders (direct bind mount `./volumes/theme/tasmofleet`), as used on Eibesthal.
 

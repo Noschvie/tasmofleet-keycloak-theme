@@ -4,7 +4,7 @@ Custom Keycloak **login theme** in the visual identity of
 [TasmoFleet](https://github.com/hellwand/tasmofleet).
 
 > Unofficial community theme for TasmoFleet, not affiliated with the project.
-> Design tokens, logo and favicon come from TasmoFleet release v0.36.1 (see NOTICE).
+> Design tokens, logo and favicon come from TasmoFleet release v0.38.0 (see NOTICE).
 > Status: 0.1.0.
 
 | Light | Dark |
