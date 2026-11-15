@@ -5,6 +5,62 @@ Format based on Keep a Changelog, versioning follows SemVer.
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-11-15
+
+### Changed
+- Text inputs, the password field and secondary buttons use the new TasmoFleet token `--color-control-border` (`#808a94` light, `#68737f` dark): 3.5:1 / 3.7:1 against the card instead of 1.67:1 / 1.75:1, which meets WCAG 1.4.11 (hellwand/tasmofleet#829, released in TasmoFleet v0.38.0). `--color-border-strong` stays for dividers and card edges.
+- Tokens, logo, favicon and fonts now refer to TasmoFleet release v0.38.0; the logo, favicon and fonts are byte-identical to v0.36.1, the token table differs only by the new token.
+- Brand name: `deployment.md`, README and the dev realm now name both realm fields, `displayName` and `displayNameHtml` (the brand above the card comes from the realm).
+- `deployment.md`: added the simple variant without versioned folders (direct bind mount `./volumes/theme/tasmofleet`), as used on Eibesthal.
+
+## [0.1.2] - 2026-11-14
+
+### Fixed
+- `.gitignore` excluded every `screenshots/` folder, now only the one in the repository root (`/screenshots/`).
+
+### Changed
+- Releases use the source archive that GitHub creates for the tag; `deployment.md` and `releasing.md` describe unpacking it (theme folder `theme/tasmofleet`). `scripts/package.sh` is optional.
+
+## [0.1.1] - 2026-11-14
+
+### Fixed
+- README screenshots were missing from the 0.1.0 tag (documentation only, the theme is unchanged).
+
+## [0.1.0] - 2026-11-14
+
+First release.
+
 ### Added
 - Repository scaffold, development environment and test realm.
 - AGPL-3.0-or-later licence (OQ-06).
+- Iteration 1 of the login CSS: TasmoFleet tokens (light/dark), 420 px card,
+  Geist fonts, form controls, primary button, brand above the card.
+
+- Iteration 2 of the login CSS, derived from captured pages: banners (PatternFly
+  alerts in the upstream banner style with dot and tone colours), field errors,
+  secondary button, running text and lists, info band, QR code on the OTP page.
+
+- Logout confirmation: spacing above the "back to application" link.
+
+- Narrow screens (up to 30 rem): the language select moves above the title, so long words such as "Mehrfachauthentifizierung" are no longer broken in the middle.
+
+- Real TasmoFleet logo and favicon (`img/logo.svg`, `img/favicon.ico`, release v0.36.1), allowed by the maintainer in hellwand/tasmofleet#830; NOTICE names source, path and tag. `favicon.svg` is not bundled: Keycloak's template links only `favicon.ico`.
+- Unofficial-community wording in README, NOTICE, `theme.properties` and CSS header; tokens pinned to tag v0.36.1.
+- README with screenshots; documentation for deployment, releasing and upgrading.
+
+### Added (tooling)
+- `dev/capture-pages.sh` snapshots login pages of the dev realm to `dev/snapshots/`.
+- `dev/smoke-test.sh` checks theme, assets, headers, sign-in and logout against the dev realm; `dev/capture-pages.sh` also saves the error and logout pages.
+- `scripts/package.sh` builds the release archive, `scripts/check-pf-vars.py` checks PatternFly variables.
+
+### Fixed
+- Password field: remove the divider and tinted background around the visibility button (dark mode).
+- "Remember me": align the checkbox with its label (PatternFly variables instead of direct font rules).
+- Brand: the gap to the card is 20 px, set through PatternFly's brand margin variable (the earlier attempt with 0 removed the gap completely).
+- Buttons in forms are as wide as the fields again (parent and child margins of `.pf-v5-c-form__actions` are reset together).
+- OTP page: bullets for the list of supported apps.
+- Language select is compact, so the German heading fits on one line at card width.
+
+### Changed
+- Dev compose port is configurable (`KC_DEV_PORT`, default 8040).
+- Dev realm sets the display name `TasmoFleet`.

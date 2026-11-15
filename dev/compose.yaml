@@ -12,7 +12,7 @@ services:
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin
     ports:
-      - "${KC_DEV_BIND:-127.0.0.1}:8080:8080"
+      - "${KC_DEV_BIND:-127.0.0.1}:${KC_DEV_PORT:-8040}:8080"
     volumes:
       - ../theme/tasmofleet:/opt/keycloak/themes/tasmofleet:ro
       - ./realm-tasmofleet-test.json:/opt/keycloak/data/import/realm-tasmofleet-test.json:ro

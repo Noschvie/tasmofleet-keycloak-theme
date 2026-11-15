@@ -4,14 +4,15 @@
 
 | ID | Question | Status | Notes |
 |---|---|---|---|
-| OQ-01 | Parent theme | Open | Verify `keycloak.v2` and style names on 26.8.2 (Phase 2) |
-| OQ-02 | Logo | Open | Confirm with maintainer; placeholder in use |
-| OQ-03 | Font assets | Open | Geist is OFL 1.1; add notice when bundling |
+| OQ-01 | Parent theme | **Decided 2026-11-13** | `keycloak.v2`; `styles=css/styles.css css/tasmofleet-login.css` verified on 26.8.2 (both stylesheets are loaded) |
+| OQ-02 | Logo and favicon | **Decided 2026-11-14** | Maintainer answered in https://github.com/hellwand/tasmofleet/issues/830: `assets/branding/logo.svg` and `favicon.ico` may be used (AGPL-3.0-or-later, name source/path/tag in NOTICE, no official-looking presentation). Copied from tag v0.36.1. `favicon.svg` not bundled (the Keycloak template links only `favicon.ico`; a template override is not worth it) |
+| OQ-03 | Font assets | **Decided 2026-11-14** | Geist latin and latin-ext woff2 bundled with OFL.txt, confirmed by the maintainer; byte-identical to tag v0.36.1 |
 | OQ-04 | Dark mode switch | Decided (initial) | System preference only |
-| OQ-05 | Footer | Open | Minimal or none |
+| OQ-05 | Footer | **Decided 2026-11-14** | None. The upstream sign-in footer shows the application version and host, which Keycloak does not know |
 | OQ-06 | Repository licence | **Decided 2026-11-13** | AGPL-3.0-or-later |
-| OQ-07 | Theme packaging | Decided (initial) | Read-only Docker volume |
-| OQ-08 | Upstream contribution | Open | After first working version |
+| OQ-07 | Theme packaging | **Decided 2026-11-14** | GitHub source archive of the tag, unpacked on the host (`theme/tasmofleet` is the theme), read-only Docker volume, see `deployment.md`. `scripts/package.sh` stays as an optional tool |
+| OQ-08 | Upstream contribution | Open, agreed in principle | Maintainer is fine with a short PR ("Community projects" in the README) after the first release, see https://github.com/hellwand/tasmofleet/issues/830 |
+| OQ-09 | Control border contrast | **Decided 2026-11-15** | Upstream issue hellwand/tasmofleet#829, option A: dedicated token `--color-control-border` for inputs, selects and default buttons (WCAG 1.4.11). Released in TasmoFleet v0.38.0; the theme uses it for `.pf-v5-c-form-control`, `.pf-v5-c-input-group` and the secondary button. The PatternFly border variables keep `--color-border-strong` |
 
 ## Decision log
 
@@ -23,12 +24,48 @@ are not covered by the AGPL.
 
 ## Design tokens
 
-To be filled from upstream `docs/spec/design-system.md`, `design/v2/`
-and `/styleguide`. Record source and upstream commit for each value.
+Source: TasmoFleet `docs/spec/design-system.md` (token table) and
+`internal/web/static/app.css`. Upstream is `hellwand/tasmofleet`. The values were first
+read from the copy `Noschvie/TasmoFleet` (branch `main`, 2026-11-13) and compared with
+`hellwand/tasmofleet` `main` on 2026-11-14: `design-system.md`, `assets/branding/logo.svg`
+and the Geist woff2 files are byte-identical; `app.css` differs only in unrelated parts
+(tables, tooltips, a list of known devices), not in tokens, auth card or banners.
+Commit hash not recorded (GitHub API was rate limited); record it on the next sync.
 
-| Token | Light | Dark | Source |
-|---|---|---|---|
-| | | | |
+Names and values are copied verbatim from the token table into
+`tasmofleet-login.css`. Only the subset used by the login pages is included.
+
+| Topic | Decision |
+|---|---|
+| Dark mode | Keycloak sets `pf-v5-theme-dark` on `<html>` before first paint; dark tokens use `:root.pf-v5-theme-dark` (upstream uses `data-theme`) |
+| PatternFly mapping | Tokens are mapped to `--pf-v5-global--*` and `--pf-v5-c-*` variables first, direct rules only where PatternFly draws borders itself |
+| Card | 420 px, radius 12, padding 24, border 1 px `--color-border`, no shadow (upstream `.auth-card`) |
+| Heading | `600 20px/1.2`, letter-spacing -0.015em |
+| Controls | height 34 px, radius 7, strong border, 13.5 px text; primary button 38 px (`btn-tall`), 600 13px |
+| Brand | Mark 28 px and name `600 18px`, centred above the card (upstream `.page-auth .brand`) |
+| Product name | Realm display name `TasmoFleet` (D15); CSS does not change the text |
+| `!important` | One use, on `#kc-header-wrapper`, because Keycloak sets its colour with `!important` |
+| Banners | `.pf-v5-c-alert` styled like upstream `.banner`: 1 px tone border, tone background, 8 px dot instead of the Font Awesome glyph, 13 px text, weight 500. Tones: warning, danger, success, default (info) = accent |
+| Field errors | `.pf-m-error` / `aria-invalid="true"`: danger border, helper text `600 12px` in `--color-danger-fg` (upstream `.field-error`) |
+| Secondary button | Surface, strong border, `500 13px`, 34 px (upstream `.btn`) |
+| Running text | `13.5px/1.45`, `--color-text-2` (upstream `.auth-text`) |
+| Info band | Hairline top border, left aligned, no extra padding |
+| QR code | Always a white ground, 1 px border, radius 10, no shadow |
+| Footer | Not implemented (OQ-05) |
+
+## Accessibility audit (2026-11-13)
+
+Contrast ratios computed from the upstream tokens (WCAG relative luminance).
+All text pairs pass AA (4.5:1) in light and dark: text, `text-2`, `text-3`, links,
+primary button, error text, banners (warning, danger, success, info), focus ring (about 6:1).
+
+| Finding | Ratio | Decision |
+|---|---|---|
+| Control border `--color-border-strong` on card, light | 1.67:1 (needs 3:1, WCAG 1.4.11) | Keep the upstream value; reported as https://github.com/hellwand/tasmofleet/issues/829 |
+| Control border on card, dark | 1.75:1 | same |
+
+Candidate values for a dedicated control-border token, included in the issue:
+light `#808a94` (3.5:1 on card), dark `#68737f` (3.7:1 on card).
 
 ## Template overrides
 
